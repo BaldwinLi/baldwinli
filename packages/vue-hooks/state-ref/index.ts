@@ -93,7 +93,7 @@ export function writableRef<T>(value: T, option?: EmitterOption<T>): Ref<T> {
     if (isPrimitive(val)) {
       emitter.set(val);
     } else {
-      emitter.set(convertProxy(void 0, val, emitter as Emitter<any>, _track, _trigger));
+      emitter.set(convertProxy(void 0, val as any, emitter as Emitter<any>, _track, _trigger));
     }
   }
   return customRef((track, trigger) => {
@@ -158,7 +158,7 @@ export function asyncWritableRef<T, A extends unknown[]>(
         emitter.set(instance);
       } else {
         emitter.set(
-          convertProxy(void 0, instance, emitter as Emitter<any>, _track, _trigger) as any,
+          convertProxy(void 0, instance as any, emitter as Emitter<any>, _track, _trigger) as any,
         );
       }
       isFunction(_cb) && _cb(emitter.get());

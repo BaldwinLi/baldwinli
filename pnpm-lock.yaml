@@ -51,11 +51,26 @@ importers:
         specifier: ^3.3.0
         version: 3.5.13(typescript@5.7.2)
 
+  packages/core/dist:
+    dependencies:
+      decimal.js:
+        specifier: ^10.4.3
+        version: 10.4.3
+      qs:
+        specifier: ^6.11.2
+        version: 6.13.1
+      radash:
+        specifier: ^12.1.0
+        version: 12.1.0
+      vue:
+        specifier: ^3.3.0
+        version: 3.5.13(typescript@5.7.2)
+
   packages/vue-hooks:
     dependencies:
       '@probe/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../core/dist
       radash:
         specifier: ^11.0.0
         version: 11.0.0

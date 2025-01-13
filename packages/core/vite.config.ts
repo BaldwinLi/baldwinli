@@ -1,27 +1,30 @@
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
-import copy from 'rollup-plugin-copy';
+// import copy from 'rollup-plugin-copy';
 
 export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'index.ts'),
-      name: 'common-util',
+      name: 'core',
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['@angular/core', 'axios', 'lodash', 'rxjs'],
+      external: ['vue', 'radash', 'qs', 'decimal.js'],
     },
-    outDir: resolve(__dirname, '..', 'dist', 'common-util'),
+    outDir: resolve(__dirname, 'dist'),
   },
   plugins: [
-    dts(),
-    copy({
-      targets: [
-        { src: './package.json', dest: '../dist/common-util' }, //执行拷贝
-      ],
+    dts({
+      root: __dirname,
+      entryRoot: __dirname,
     }),
+    // copy({
+    //   targets: [
+    //     { src: 'packages/core/package.json', dest: 'packages/core/dist' }, //执行拷贝
+    //   ],
+    // }),
   ],
 });
 //   ({

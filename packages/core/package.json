@@ -1,20 +1,11 @@
 {
   "name": "@probe/core",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "vite build && tsc --emitDeclarationOnly",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "lint": "eslint . --ext .ts,.vue --fix",
-    "prepublishOnly": "npm run build",
-    "publish": "npm publish --access public"
-  },
+  "main": "index.js",
+  "module": "index.esm.js",
+  "types": "index.d.ts",
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "dependencies": {
     "radash": "^12.1.0",

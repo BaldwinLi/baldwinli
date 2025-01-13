@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "vite build"
+    "build:core": "vite build -c ./packages/core/vite.config.ts && cp -rf ./packages/core/package.json ./packages/core/dist"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.11",
