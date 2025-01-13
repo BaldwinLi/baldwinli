@@ -47,9 +47,6 @@ importers:
       radash:
         specifier: ^12.1.0
         version: 12.1.0
-      vue:
-        specifier: ^3.3.0
-        version: 3.5.13(typescript@5.7.2)
 
   packages/core/dist:
     dependencies:

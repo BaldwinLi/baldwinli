@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
-import copy from 'rollup-plugin-copy';
 
 export default defineConfig({
   build: {
@@ -15,14 +14,7 @@ export default defineConfig({
     },
     outDir: resolve(__dirname, '..', 'dist', 'common-util'),
   },
-  plugins: [
-    dts(),
-    copy({
-      targets: [
-        { src: './package.json', dest: '../dist/common-util' }, //执行拷贝
-      ],
-    }),
-  ],
+  plugins: [dts()],
 });
 //   ({
 //   build: {

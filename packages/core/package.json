@@ -1,16 +1,12 @@
 {
   "name": "@probe/core",
   "version": "1.0.0",
-  "main": "index.js",
-  "module": "index.esm.js",
+  "main": "index.umd.js",
+  "module": "index.mjs",
   "types": "index.d.ts",
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "radash": "^12.1.0",
     "qs": "^6.11.2",
-    "decimal.js": "^10.4.3",
-    "vue": "^3.3.0"
+    "decimal.js": "^10.4.3"
   }
 }
