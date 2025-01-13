@@ -1,0 +1,27 @@
+{
+  "name": "@probe/vue-hooks",
+  "version": "1.0.0",
+  "description": "Hooks based on vue",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint . --ext .ts,.vue --fix",
+    "prepublishOnly": "npm run build",
+    "publish": "npm publish --access public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "Baldwin Li",
+  "license": "MIT",
+  "dependencies": {
+    "@probe/core": "workspace:*",
+    "vue": "^3.3.0",
+    "radash": "^11.0.0"
+  }
+}
