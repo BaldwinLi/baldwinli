@@ -1,9 +1,9 @@
 {
   "name": "@baldwinli/core",
-  "version": "1.0.0",
-  "main": "index.umd.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
+  "version": "1.0.0-alpha.0",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "description": "The core kit of baldwinli.",
   "license": "ISC",
   "keywords": [
@@ -13,14 +13,15 @@
     "state",
     "baldwinli"
   ],
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "dependencies": {
     "radash": "^12.1.0",
     "qs": "^6.11.2",
     "decimal.js": "^10.4.3"
   },
-  "files": [
-    "dist"
-  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

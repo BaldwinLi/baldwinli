@@ -6,8 +6,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build:core": "vite build -c ./packages/core/vite.config.ts && cp -rf ./packages/core/package.json ./packages/core/dist && rm -f ./packages/core/dist/vite.config.d.ts",
-    "build:vue-hooks": "vite build -c ./packages/vue-hooks/vite.config.ts && cp -rf ./packages/vue-hooks/package.json ./packages/vue-hooks/dist && rm -f ./packages/vue-hooks/dist/vite.config.d.ts"
+    "build:core": "vite build -c ./packages/core/vite.config.ts && rm -f ./packages/core/dist/vite.config.d.ts",
+    "build:vue-hooks": "vite build -c ./packages/vue-hooks/vite.config.ts && rm -f ./packages/vue-hooks/dist/vite.config.d.ts",
+    "build": "npm run build:core && npm run build:vue-hooks"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.11",

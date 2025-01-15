@@ -63,6 +63,18 @@ importers:
   packages/vue-hooks:
     dependencies:
       '@baldwinli/core':
+        specifier: '*'
+        version: 1.0.0
+      radash:
+        specifier: ^11.0.0
+        version: 11.0.0
+      vue:
+        specifier: ^3.3.0
+        version: 3.5.13(typescript@5.7.2)
+
+  packages/vue-hooks/dist:
+    dependencies:
+      '@baldwinli/core':
         specifier: ^1.0.0
         version: 1.0.0
       radash:
