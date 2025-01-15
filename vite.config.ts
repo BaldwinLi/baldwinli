@@ -29,7 +29,7 @@ export default defineConfig({
 //         chunkFileNames: 'dist/[name]-[hash].js',
 //         assetFileNames: 'dist/[name]-[hash][extname]',
 //       },
-//       external: ['vue', 'radash', 'qs', 'decimal.js', '@probe/core'],
+//       external: ['vue', 'radash', 'qs', 'decimal.js', '@baldwinli/core'],
 //       preserveEntrySignatures: 'strict',
 //     },
 //   },

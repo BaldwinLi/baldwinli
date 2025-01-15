@@ -1,4 +1,4 @@
-import { type EmitterOption, Emitter, isProxy } from '@probe/core';
+import { type EmitterOption, Emitter, isProxy } from '@baldwinli/core';
 import { isFunction, isPrimitive } from 'radash';
 import { customRef, type Ref } from 'vue';
 

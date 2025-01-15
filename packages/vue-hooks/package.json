@@ -1,27 +1,30 @@
 {
-  "name": "@probe/vue-hooks",
+  "name": "@baldwinli/vue-hooks",
   "version": "1.0.0",
-  "description": "Hooks based on vue",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "vite build && tsc --emitDeclarationOnly",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "lint": "eslint . --ext .ts,.vue --fix",
-    "prepublishOnly": "npm run build",
-    "publish": "npm publish --access public"
-  },
+  "description": "The vue hooks kit of baldwinli.",
+  "license": "ISC",
+  "keywords": [
+    "web",
+    "node",
+    "typescript",
+    "state",
+    "baldwinli",
+    "vue"
+  ],
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "author": "Baldwin Li",
-  "license": "MIT",
   "dependencies": {
-    "@probe/core": "workspace:*",
-    "vue": "^3.3.0",
-    "radash": "^11.0.0"
+    "@baldwinli/core": "^1.0.0",
+    "radash": "^11.0.0",
+    "vue": "^3.3.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

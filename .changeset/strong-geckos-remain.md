@@ -1,6 +1,6 @@
 ---
-'@probe/core': major
-'@probe/vue-hooks': major
+'@baldwinli/core': major
+'@baldwinli/vue-hooks': major
 ---
 
 Init Project

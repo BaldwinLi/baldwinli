@@ -59,15 +59,12 @@ importers:
       radash:
         specifier: ^12.1.0
         version: 12.1.0
-      vue:
-        specifier: ^3.3.0
-        version: 3.5.13(typescript@5.7.2)
 
   packages/vue-hooks:
     dependencies:
-      '@probe/core':
-        specifier: workspace:*
-        version: link:../core/dist
+      '@baldwinli/core':
+        specifier: ^1.0.0
+        version: 1.0.0
       radash:
         specifier: ^11.0.0
         version: 11.0.0
@@ -97,6 +94,9 @@ packages:
   '@babel/types@7.26.3':
     resolution: {integrity: sha512-vN5p+1kl59GVKMvTHt55NzzmYVxprfJD+ql7U9NFIfKCBkYE55LYtS+WtPlaYOyzydrKI8Nezd+aZextrd+FMA==}
     engines: {node: '>=6.9.0'}
+
+  '@baldwinli/core@1.0.0':
+    resolution: {integrity: sha512-i90mIDax/AVYubeA0uUeoB0NdsFrzp/2mf7AQDOoFSrsEyr7/3WbEcb3IRzSe1zYFMBtXP5b3vnucgPNBQeTPQ==}
 
   '@changesets/apply-release-plan@7.0.7':
     resolution: {integrity: sha512-qnPOcmmmnD0MfMg9DjU1/onORFyRpDXkMMl2IJg9mECY6RnxL3wN0TCCc92b2sXt1jt8DgjAUUsZYGUGTdYIXA==}
@@ -1468,6 +1468,12 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
+
+  '@baldwinli/core@1.0.0':
+    dependencies:
+      decimal.js: 10.4.3
+      qs: 6.13.1
+      radash: 12.1.0
 
   '@changesets/apply-release-plan@7.0.7':
     dependencies:

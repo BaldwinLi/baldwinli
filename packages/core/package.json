@@ -1,12 +1,28 @@
 {
-  "name": "@probe/core",
+  "name": "@baldwinli/core",
   "version": "1.0.0",
   "main": "index.umd.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "description": "The core kit of baldwinli.",
+  "license": "ISC",
+  "keywords": [
+    "web",
+    "node",
+    "typescript",
+    "state",
+    "baldwinli"
+  ],
   "dependencies": {
     "radash": "^12.1.0",
     "qs": "^6.11.2",
     "decimal.js": "^10.4.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

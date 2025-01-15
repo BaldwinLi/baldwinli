@@ -1,5 +1,5 @@
 import { type ComputedRef, computed } from 'vue';
-import { hash } from '@probe/core';
+import { hash } from '@baldwinli/core';
 /**
  * @description 通过方法获得该方法对应返回计算属性的方法, 使得在参数不变的情况下状态不变
  * @param fn

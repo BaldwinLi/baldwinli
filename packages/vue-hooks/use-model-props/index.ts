@@ -1,6 +1,6 @@
 import { isPrimitive, isFunction } from 'radash';
 import { computed, defineEmits, type WritableComputedRef } from 'vue';
-import { isProxy } from '@probe/core';
+import { isProxy } from '@baldwinli/core';
 
 type ComputedPrettify<T> = {
   [P in keyof T]: WritableComputedRef<T[P]>;
