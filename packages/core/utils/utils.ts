@@ -52,9 +52,8 @@ export function dateFormat(date: string | number | Date, fmt: string = dateForma
   return fmt;
 }
 
-
 export function isProxy(obj: any) {
-  return Object.prototype.toString.call(obj) === "[object Proxy]";
+  return Object.prototype.toString.call(obj) === '[object Proxy]';
 }
 
 export function isVoid(val: any): boolean {
@@ -62,12 +61,7 @@ export function isVoid(val: any): boolean {
 }
 
 export function isEmpty(target: Dict<any>): boolean {
-  for (const index in target) {
-    if (!isVoid(target[index])) {
-      return false;
-    }
-  }
-  return true;
+  return Reflect.ownKeys(target)?.length === 0;
 }
 
 export function isUndefined(val: any): boolean {
