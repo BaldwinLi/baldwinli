@@ -1,8 +1,10 @@
 import { isPrimitive } from 'radash';
 import { getContainer } from '../utils/provide';
-import { cacheService } from '..';
+import { CacheService } from '../services/cache-service';
 import { onCreatedService } from '../utils/provide';
 import { hash, isProxy, isVoid } from '../utils/utils';
+
+const cache = new CacheService();
 /**
  * @description 类的属性修饰器, 使其状态会存储到CacheService中(即状态不会随着浏览器刷新而丢失, 状态生命周期与CacheService相同)
  * @attention 被该修饰器修饰的成员所在的类必须被Service修饰器修饰, 并且能够在相应命名空间的IoC容器中找到当前类的实例, 否则无法确定该成员在运行时的唯一性以至于无法持久化存储
@@ -25,10 +27,7 @@ export function Store<T>(
               Object.getOwnPropertyNames(target).reduce((p, n) => p + n, '') +
               Object.getOwnPropertyNames(instance).reduce((p, n) => p + n, ''),
           );
-          let value: any = generateValue(
-            cacheService.get(identifier) ?? instance[propName],
-            identifier,
-          );
+          let value: any = generateValue(cache.get(identifier) ?? instance[propName], identifier);
           Object.defineProperty(instance, propName, {
             configurable: true,
             enumerable: true,
@@ -62,9 +61,9 @@ function generateValue(val: any, identifier: string): void {
     value = convertProxy(void 0, val as any, identifier);
   }
   if (isVoid(val)) {
-    cacheService.remove(identifier);
+    cache.remove(identifier);
   } else {
-    cacheService.set(identifier, val);
+    cache.set(identifier, val);
   }
   return value;
 }
@@ -90,7 +89,7 @@ function convertProxy<T extends object>(origin: any, ins: T, identifier: string)
     } else {
       target[name] = val;
     }
-    cacheService.set(identifier, raw);
+    cache.set(identifier, raw);
     return true;
   }
   function getter(target: any, name: string): void {

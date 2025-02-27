@@ -29,6 +29,9 @@ export function useModelProp(
         _value = generateValue(val, name, { track, trigger }, emit);
         trigger();
       },
+      {
+        deep: true,
+      },
     );
     return {
       get() {
