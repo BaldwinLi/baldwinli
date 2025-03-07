@@ -150,3 +150,4 @@ export class CacheService {
     this._storage.namespace = this.NAMESPACE + '-';
   }
 }
+export const cacheService = new CacheService();

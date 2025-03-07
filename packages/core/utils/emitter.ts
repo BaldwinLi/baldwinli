@@ -1,8 +1,7 @@
 import { clone, isFunction } from 'radash';
 import { NAMESPACE } from './util.schema';
-import { CacheService } from '../services/cache-service';
+import { cacheService } from '../services/cache-service';
 const MSG = 'message';
-const cacheStore = new CacheService();
 let channel: BroadcastChannel;
 
 export interface Option<T> {
@@ -22,12 +21,12 @@ export class Emitter<T> {
     this.listenHandler.bind(this);
   constructor(value: T, option?: Option<T>) {
     this.channelName = option?.channelName;
-    this.value = this.channelName ? cacheStore.get(this.channelName) || value : value;
+    this.value = this.channelName ? cacheService.get(this.channelName) || value : value;
     if (!channel && this.channelName) {
       channel = window.BroadcastChannel && new window.BroadcastChannel(NAMESPACE);
     }
     if (this.channelName) {
-      cacheStore.set(this.channelName, this.value);
+      cacheService.set(this.channelName, this.value);
       channel?.addEventListener(MSG, this.bindingListenerHandler);
     }
     if (isFunction(option?.start)) {
@@ -50,7 +49,7 @@ export class Emitter<T> {
   public set(value: T): void {
     this.value = clone(value);
     if (this.channelName) {
-      cacheStore.set(this.channelName, this.value);
+      cacheService.set(this.channelName, this.value);
       channel?.postMessage({ data: value, type: this.channelName });
     }
     this.listenHandler({ data: { data: value, type: this.channelName } });

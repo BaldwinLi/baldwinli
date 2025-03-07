@@ -1,6 +1,6 @@
 {
   "name": "@baldwinli/core",
-  "version": "1.0.4",
+  "version": "1.0.9",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
