@@ -4,16 +4,42 @@ import { isEmpty, isFunction, trim } from 'radash';
 import type { Constructable } from '../utils/util.schema';
 import { concatenate, isNull, isUndefined } from '../utils/utils';
 import { clearDirty } from '../utils/provide';
-type QueryDict = Dict<string | number | boolean | any>;
-type Method = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD' | 'PUT';
+
 /**
- * @description HttpClient抽象类,封装fetch使子类具备基本http能力, 必须被子类继承
+ * 查询参数字典类型
+ */
+type QueryDict = Dict<string | number | boolean | any>;
+
+/**
+ * HTTP方法类型
+ */
+type Method = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD' | 'PUT';
+
+/**
+ * HTTP客户端抽象类
+ * @description 封装fetch API，提供便捷的HTTP请求方法，必须被子类继承以实现具体功能
  */
 @Hooksable
 export abstract class HttpClient {
+  /**
+   * 默认配置对象
+   */
   protected pdefaultConfig: RequestInit;
+  
+  /**
+   * API基础URL
+   */
   protected baseURL: string = '/';
+  
+  /**
+   * 缓存服务实例
+   */
   protected cache!: CacheService;
+  
+  /**
+   * 构造函数
+   * @description 初始化默认配置，设置默认Content-Type为application/json
+   */
   constructor() {
     this.pdefaultConfig = {
       headers: {
@@ -22,10 +48,20 @@ export abstract class HttpClient {
     } as any;
   }
 
+  /**
+   * 默认配置获取器
+   * @returns 默认请求配置对象
+   */
   get defaultConfig(): RequestInit {
     return this.pdefaultConfig;
   }
 
+  /**
+   * 通用请求方法
+   * @param input - 请求URL或Request对象
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async request(input: RequestInfo | URL, config: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(input as string, void 0, config.body as any, conf);
@@ -37,6 +73,13 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * GET请求方法
+   * @param url - 请求URL
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async get(url: string, query?: QueryDict, config?: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(url, query, void 0, {
@@ -46,6 +89,13 @@ export abstract class HttpClient {
     return this.doneResponse(fetch(this.getRequest(this.stringifyQuery(url, query), 'GET', conf)));
   }
 
+  /**
+   * DELETE请求方法
+   * @param url - 请求URL
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async delete(url: string, query?: QueryDict, config?: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(url, query, void 0, {
@@ -57,6 +107,13 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * HEAD请求方法
+   * @param url - 请求URL
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async head(url: string, query?: QueryDict, config?: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(url, query, void 0, {
@@ -66,6 +123,13 @@ export abstract class HttpClient {
     return this.doneResponse(fetch(this.getRequest(this.stringifyQuery(url, query), 'HEAD', conf)));
   }
 
+  /**
+   * OPTIONS请求方法
+   * @param url - 请求URL
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async options(url: string, query?: QueryDict, config?: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(url, query, void 0, {
@@ -77,6 +141,14 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * POST请求方法
+   * @param url - 请求URL
+   * @param data - 请求体数据
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async post(
     url: string,
     data?: any,
@@ -99,6 +171,14 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * PUT请求方法
+   * @param url - 请求URL
+   * @param data - 请求体数据
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async put(url: string, data?: any, query?: QueryDict, config?: RequestInit): Promise<any> {
     const conf = this.doMergeConfig(config!);
     await this.beforeRequest(url, query, data, {
@@ -116,6 +196,14 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * PATCH请求方法
+   * @param url - 请求URL
+   * @param data - 请求体数据
+   * @param query - 查询参数
+   * @param config - 请求配置
+   * @returns 请求响应结果
+   */
   public async patch(
     url: string,
     data?: any,
@@ -138,6 +226,19 @@ export abstract class HttpClient {
     );
   }
 
+  /**
+   * 文件上传方法
+   * @param url - 上传URL
+   * @param method - HTTP方法
+   * @param data - 包含文件的表单数据
+   * @param options - 上传选项
+   * @param options.query - 查询参数
+   * @param options.headers - 请求头
+   * @param options.chunk - 是否启用分片上传
+   * @param options.boundary - 多部分表单边界
+   * @param options.onProgress - 上传进度回调
+   * @returns 上传响应结果
+   */
   public async upload(
     url: string,
     method: Method,
@@ -159,11 +260,15 @@ export abstract class HttpClient {
     });
     let resultPromise: Promise<Response>;
     const _url = this.stringifyQuery(url, options?.query);
+    
+    // 分片上传逻辑
     if (options?.chunk) {
       resultPromise = (async () => {
         const promises = [] as Promise<Response[]>[];
         let total = 0;
         const loadedMap: Dict<number> = {};
+        
+        // 处理所有文件
         for (const key in data) {
           if (data[key] instanceof File) {
             total += (data[key] as any)?.size || 0;
@@ -179,12 +284,15 @@ export abstract class HttpClient {
                   for (const key in loadedMap) {
                     _loaded += loadedMap[key] || 0;
                   }
+                  // 调用进度回调
                   isFunction(options?.onProgress) && options?.onProgress!(_loaded, total);
                 },
               ),
             );
           }
         }
+        
+        // 等待所有上传完成并返回最后一个响应
         const results = (await Promise.all(promises)).flat();
         return results[results.length - 1];
       })();
